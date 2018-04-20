@@ -1,10 +1,10 @@
 <?php
 
-namespace Therour\RajaOngkir;
+namespace Therour\RajaOngkir\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class RajaOngkirFacade extends Facade
+class RajaOngkir extends Facade
 {
 	protected static function getFacadeAccessor()
 	{

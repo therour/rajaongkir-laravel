@@ -32,11 +32,30 @@ add your credential in `config/services.php` of your laravel project
 ]
 ```
 
+#### Cache
+to enable caching of provinces and cities
+add this code to your `app\Providers\AppServiceProvider.php`
+```php
+use Therour\RajaOngkir\Facades\RajaOngkir; 
+
+class AppServiceProvider extends ServiceProvider
+{
+
+    public function boot()
+    {
+    	....
+
+    	RajaOngkir::shouldCache($expire = 60); // cache expires in 60 minutes
+    }
+
+    ....
+}
+```
 ### Usage
 
 #### Get Province and City by RajaOngkir
 ```php
-use Therour\RajaOngkir\RajaOngkir;
+use Therour\RajaOngkir\Facades\RajaOngkir;
 
 $provinces = RajaOngkir::provinces; // return array of Therour\RajaOngkir\Province Objects
 
@@ -63,7 +82,7 @@ Note:
 Code:
 
 ```php
-use Therour\RajaOngkir\RajaOngkir;
+use Therour\RajaOngkir\Facades\RajaOngkir;
 
 // get calculation with default origin by your application service config
 $cost = RajaOngkir::calculate($destinationID, $weight, $courier);

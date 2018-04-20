@@ -141,8 +141,9 @@ class RajaOngkir extends Base
 		return $this;
 	}
 
-	public static function shouldCache($yes = true)
+	public static function shouldCache($expire = 60, $yes = true)
 	{
 		parent::$cache = $yes;
+		parent::$cacheExpires = $expire;
 	}
 }
