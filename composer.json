@@ -6,6 +6,11 @@
         "illuminate/support": "~5",
         "guzzlehttp/guzzle": "~6"
     },
+    "autoload": {
+        "psr-4": {
+            "Therour\\RajaOngkir\\": "src/"
+        }
+    },
     "license": "MIT",
     "authors": [
         {
