@@ -2,7 +2,7 @@
 
 namespace Therour\RajaOngkir;
 
-use Illuminate\Support\Facades\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class RajaOngkirServiceProvider extends ServiceProvider
 {
