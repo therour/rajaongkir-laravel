@@ -2,6 +2,8 @@
 
 namespace Therour\RajaOngkir\App;
 
+use Therour\RajaOngkir\Facades\RajaOngkir as ROFacade;
+
 class Province extends Base
 {
 	use UsingAttributes;
@@ -21,8 +23,19 @@ class Province extends Base
 
 	public function getCities()
 	{
-		if ($result = $this->shouldGetFromCache('rajaongkir.provinces.'.$this->id.'.cities')) {
-			return $result;
+		if (parent::$cache && is_null(cache('rajaongkir.cities'))) {
+			cache(['rajaongkir.cities' => ROFacade::getCities()], parent::$cacheExpires);
+		}
+
+		if ($cached = $this->shouldGetFromCache('rajaongkir.cities')) {
+			return  $result = collect($cached)
+						->filter(function ($i, $k) {
+							return strpos($i, 'province":"'.$this->id.'"') !== false; 
+						})
+						->map(function ($i, $k) {
+							$i = json_decode($i);
+							return new City($i->id, $i->name, $i->type, $i->postalCode, $i->province);
+						});
 		}
 
 		$http = $this->getRequest('/city', ['query' => ['province' => $this->id]]);
@@ -34,7 +47,7 @@ class Province extends Base
 			$arr[$city->city_id] = new City($city->city_id, $city->city_name, $city->type, $city->postal_code, $city->province_id);
 		}
 
-		return $this->shouldSaveToCache('rajaongkir.provinces.'.$this->id.'.cities', $arr);
+		return $arr;
 	}
 
 	public function citiesAttribute()
@@ -64,5 +77,13 @@ class Province extends Base
 		}
 
 		return;
+	}
+
+	public function __toString()
+	{
+		return json_encode((object) [
+			'id' => $this->id,
+			'name' => $this->name,
+		]);
 	}
 }

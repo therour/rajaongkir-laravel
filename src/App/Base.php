@@ -76,7 +76,14 @@ abstract class Base
 	protected function shouldSaveToCache($key, $value)
 	{
 		if (self::$cache) {
-			cache([$key => $value], self::$cacheExpires);
+			if (is_array($value)) {
+				$serialized = collect($value)->map( function ($item, $key) {
+					return (string) $item;
+				})->all();
+			} else {
+				$serialized = (string) $value;
+			}
+			cache([$key => $serialized], self::$cacheExpires);
 		}
 
 		return $value;

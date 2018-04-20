@@ -9,7 +9,11 @@ class RajaOngkir extends Base
 	public function getProvinces()
 	{
 		if ($cached = $this->shouldGetFromCache('rajaongkir.provinces')) {
-			return $cached;
+			
+			return $result = collect($cached)->map(function ($i, $k) {
+				$i = json_decode($i);
+				return new Province($i->id, $i->name);
+			});
 		}
 		
 		$http = $this->getRequest('/province');
@@ -26,9 +30,12 @@ class RajaOngkir extends Base
 
 	public function getCities()
 	{
-
 		if ($cached = $this->shouldGetFromCache('rajaongkir.cities')) {
-			return $cached;
+			
+			return $result = collect($cached)->map(function ($i, $k) {
+				$i = json_decode($i);
+				return new City($i->id, $i->name, $i->type, $i->postalCode, $i->province);
+			});
 		}
 
 		$http = $this->getRequest('/city');

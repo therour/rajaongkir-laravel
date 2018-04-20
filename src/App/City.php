@@ -55,4 +55,15 @@ class City extends Base
 	{
 		return $this->province->cities;
 	}
+
+	public function __toString()
+	{
+		return json_encode((object)[
+			'id' => $this->id,
+			'name' => $this->name,
+			'type' => $this->type,
+			'postalCode' => $this->postalCode,
+			'province' => $this->provinceID
+		]);
+	}
 }
