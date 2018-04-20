@@ -1,22 +1,17 @@
 {
     "name": "therour/rajaongkir-laravel",
+    "description": "RajaOngkir API for Laravel 5",
     "type": "package",
-    "description": "Raja Ongkir API Laravel 5",
-    "keywords": ["rajaongkir", "shipment", "laravel"],
+    "require": {
+        "illuminate/support": "~5",
+        "guzzlehttp/guzzle": "~6"
+    },
     "license": "MIT",
     "authors": [
         {
-            "name": "Muh Nizomuddin Fauza Sidiq",
+            "name": "Nizom Sidiq",
             "email": "nizomsidiq@gmail.com"
         }
     ],
-    "autoload": {
-    	"psr-4": {
-    		"Therour\\RajaOngkir\\": "src/"
-    	}
-    },
-    "require": {
-    	"illuminate/support": "~5",
-    	"guzzlehttp/guzzle": "~6",
-    }
+    "minimum-stability": "dev"
 }
