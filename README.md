@@ -77,7 +77,7 @@ Note:
 | `$originID`     |    _integer_                | `501`   |
 | `$destinationID`|    _integer_                | `39`    |
 | `$weight`       | _integer_ **(gram)**        | `3000`  |
-| `$destinationID`| _string_ **(jne,tiki,pos)** | `'tiki'`|
+| `$courier`	  | _string_ **(jne,tiki,pos)** | `'tiki'`|
 
 Code:
 
